@@ -15,9 +15,9 @@ The workflow consists of 3 stages:
 
 
 2 Requirements 
-sklearn
-networkx
-matplotlib
+scikit-learn >= 0.24.1
+networkx >= 2.5
+matplotlib >= 3.2.1
 
 
 3 Executation
