@@ -14,8 +14,7 @@ The workflow consists of 3 stages:
 1.3 Methods comparing： the three methods are compared through plotting distribution of results and simulating information diffusion process with Susceptible-Infected–Recovered (SIR) model.
 
 
-2 Requirements
-package 
+2 Requirements 
 sklearn
 networkx
 matplotlib
@@ -27,3 +26,7 @@ matplotlib
 
 3.2 In setup.py You need to change record_file_name 'tweet_records' into the name of your records, and the records_source 'Twitter' into you source_name, and you can run the file setup.py.
 
+
+References:
+[1] Brandes, U. (2001). A faster algorithm for betweenness centrality. The Journal of Mathematical Sociology, 25(2), 163–177. https://doi.org/10.1080/0022250X.2001.9990249
+[2] Wu R, Zhou Y, Chen Z (2019) Identifying urban traffic bottlenecks with percolation theory. Urban Transport of China 17(01):96-101. https://doi.org/10.13813/j.cn11-5141/u.2019.0002
