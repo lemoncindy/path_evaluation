@@ -49,7 +49,6 @@ if __name__ == "__main__":
         # topic model to assign texts' topic vector
         topics_numbers = np.linspace(6,20,8)
         for i in topics_numbers:#iterating to find the best topics number
-            # i = 12 #topics number
             n_topics = int(i)
             # print('topics number is {}'.format(n_topics))
             start = time.perf_counter()
@@ -105,7 +104,7 @@ if __name__ == "__main__":
         trs = catd.construct_interactive_network.cal_trs(df, tp_ur)
         trs.to_excel(os.path.join(records_output_path,'trs.xlsx'),index=False)
         catd.util.write_execute_log('trs calculating costs time of {} s.\n'.format(time.perf_counter() - start))
-    n_topics = 6
+
     #load trs
     trs = pd.read_excel(os.path.join(records_output_path, 'trs.xlsx'))
     cal_idc = 0
@@ -149,8 +148,6 @@ if __name__ == "__main__":
     catd.util.trs_distribution(idc,topic_labels,record_source=records_source)
 
     # #granularity comparing
-    # n_topics = 6 分布主题数量不对
-    # topics_list = [['topic0','topic4','topic8'],['topic3','topic7','topic11'] ,['topic1','topic5','topic9'] ,['topic2','topic6','topic10']]
     topics_list = [[],[],[],[]]
     for i in range(int(n_topics/4)+1):
         for j in range(4):
@@ -158,7 +155,6 @@ if __name__ == "__main__":
                 topics_list[j].append('topic'+str(i * 4 + j))
 
     topic_labels0 = pd.read_csv(os.path.join(records_output_path, 'topic_labels.csv'), encoding='utf8')
-    #
     for topics in topics_list:
         topic_labels = [topic_labels0.loc[int(topic[5:])].topic_label for topic in topics]
         # [topicl[5:] for topic in topics]
@@ -166,34 +162,22 @@ if __name__ == "__main__":
         catd.util.edge_centrality_distribution(edge_centrality, topics,topic_labels,record_source=records_source)
     catd.util.connectivity_distribution(connectivity,record_source=records_source)
 
-
-
-    '''
-    # twitter source number = 5； weibo source number = 2
+    #spreading ability comparing
     source_num = 2
-    # spreading ability comparing
     start = time.perf_counter()
     topics = []
     for column in df.columns:
         if 'topic' in column:
             topics.append(column)
+            
     sir_steps_connectivity = catd.SIR.SIR_different_number_of_edges('connectivity', connectivity,eighty_percent_number=2000,source_num=source_num)
-
-    for topic in topics[2:5]:
-    # if 1:
-    #     topic = 'topic5'
+    for topic in topics[：]:
         catd.util.write_execute_log('{} SIR process.\n'.format(topic))
         catd.SIR.SIR_top_n(topic,idc,connectivity,edge_centrality,records_source,source_num = source_num)
         sir_steps_idc,eighty_percent_number,eighty_percent = catd.SIR.SIR_different_number_of_edges(topic,idc,source_num = source_num)
         sir_steps_edge_centrality = catd.SIR.SIR_different_number_of_edges(topic, edge_centrality,method = 'edge centrality',source_num = source_num)
         catd.SIR.plot_different_number_edges(topic, sir_steps_idc, sir_steps_connectivity, sir_steps_edge_centrality,eighty_percent_number, eighty_percent,records_source=records_source,eighty_paint=False)
     catd.util.write_execute_log('SIR costs time of {} s.\n'.format(time.perf_counter() - start))
-    '''
-    # topic = 'topic2'
-    # catd.util.write_execute_log('{} SIR process.\n'.format(topic))
-    # catd.SIR.SIR_top_n(topic, idc, connectivity, edge_centrality, records_source)
-
-    winsound.Beep(440,500)
 
     #dynamic_evaluating
     # dynamic_output_path = os.path.join(os.getcwd(),'output','dynamic_process')
@@ -228,23 +212,3 @@ if __name__ == "__main__":
     # connectivity3.to_excel(dynamic_connectivity_writer, sheet_name='9+10+11', index=False)
     # dynamic_connectivity_writer.save()
     # catd.util.write_execute_log('dynamic evaluating costs time of {} s.\n'.format(time.perf_counter() - start))
-
-    start = time.perf_counter()
-    topics = []
-    for column in df.columns:
-        if 'topic' in column:
-            topics.append(column)
-    # for topic in topics:
-    #     topic = 'topic3'
-    #     catd.util.write_execute_log('{} SIR process.\n'.format(topic))
-    #     catd.SIR.SIR_top_n(topic,idc1,connectivity1,savepath = os.path.join(os.getcwd(),'output','dynamic_process','sir'))
-    #     # catd.SIR.SIR_different_number_of_edges(topic,idc1,connectivity1,savepath = os.path.join(os.getcwd(),'output','dynamic_process','sir'))
-    #     catd.SIR.SIR_top_n(topic,idc2,connectivity2,savepath = os.path.join(os.getcwd(),'output','dynamic_process','sir'))
-    #     # catd.SIR.SIR_different_number_of_edges(topic,idc2,connectivity2,savepath = os.path.join(os.getcwd(),'output','dynamic_process','sir'))
-    #     catd.SIR.SIR_top_n(topic,idc3,connectivity3)
-    #     # catd.SIR.SIR_different_number_of_edges(topic,idc3,connectivity3)
-    # catd.util.write_execute_log('SIR costs time of {} s.\n'.format(time.perf_counter() - start))
-
-    #another dataset
-
-
