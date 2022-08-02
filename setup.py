@@ -8,7 +8,6 @@ import catd.path_evaluation_connectivity
 from catd import *
 import pandas as pd
 import os
-import winsound
 import numpy as np
 import matplotlib.pyplot as plt
 
